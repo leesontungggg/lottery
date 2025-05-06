@@ -96,11 +96,11 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center w-full h-full">
           {isVisible && (
             <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="fixed inset-0 bg-gray-500/50 transition-opacity" aria-hidden="true"></div>
+            <div className="fixed inset-0 bg-transparent transition-opacity" aria-hidden="true"></div>
           
             <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
               <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div className="relative transform overflow-hidden rounded-lg bg-blue-300/70 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div className="relative transform overflow-hidden rounded-lg bg-transparent text-left transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 aspect-square flex items-center justify-center">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -119,7 +119,7 @@ export default function Home() {
             </div>
           </div>
           )}
-          <div className={`${!isVisible ? 'opacity-100' : 'opacity-0'} bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto`}>
+          <div className={`${!isVisible ? 'opacity-100' : 'opacity-0'} bg-transparent aspect-square w-full max-w-[400px] flex justify-center items-center text-8xl mx-auto`}>
              <SlotCounter
               startValue={"000"}
               startValueOnce
@@ -128,7 +128,7 @@ export default function Home() {
               direction="bottom-up"
               autoAnimationStart={false}
               duration={10}
-              charClassName="text-[#000]"
+              charClassName="text-white"
             />
           </div>
         </div>
