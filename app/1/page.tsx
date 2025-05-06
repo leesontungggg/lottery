@@ -88,7 +88,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [nameList, numberList, originList]);
+  }, [nameList, numberList, originList, phoneList]);
 
   if (numberList.length)
     return (
@@ -121,7 +121,7 @@ export default function Home() {
             </div>
           </div>
           )}
-          {!isVisible && <div className="bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto">
+          <div className={`${!isVisible ? 'opacity-100' : 'opacity-0'} bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto`}>
              <SlotCounter
               startValue={"000"}
               startValueOnce
@@ -132,7 +132,7 @@ export default function Home() {
               duration={10}
               charClassName="text-[#000]"
             />
-          </div>}
+          </div>
         </div>
       </div>
     );
