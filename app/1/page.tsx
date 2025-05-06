@@ -107,8 +107,6 @@ export default function Home() {
                         <div className="mt-2">
                           <p className="text-white text-5xl text-center">{winnerName}</p>
                           <br />
-                          <p className="text-white text-6xl text-center">{winner[0]}</p>
-                          <br />
                           <p className="text-white text-4xl text-center">{winnerOrigin}</p>
                           <br />
                           <p className="text-white text-4xl text-center">{winnerPhone}</p>
