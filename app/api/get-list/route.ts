@@ -22,8 +22,6 @@ export async function POST() {
       range: `Lottery`,
     });
 
-    console.log("lotteryResult", lotteryResult);
-
     return Response.json({
       message: "ok",
       listNumberData: lotteryResult.data.values.map((item: any) =>
@@ -31,6 +29,7 @@ export async function POST() {
       ),
       listNameData: lotteryResult.data.values.map((item: any) => item[1]),
       listOriginData: lotteryResult.data.values.map((item: any) => item[2]),
+      listPhoneData: lotteryResult.data.values.map((item: any) => item[3]),
     });
   } catch (e) {
     console.log(e);

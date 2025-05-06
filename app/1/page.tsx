@@ -7,9 +7,11 @@ export default function Home() {
   const [winner, setWinner] = useState<any>([0]);
   const [winnerName, setWinnerName] = useState<any>("");
   const [winnerOrigin, setWinnerOrigin] = useState<any>("");
+  const [winnerPhone, setWinnerPhone] = useState<any>("");
   const [numberList, setNumberList] = useState([]);
   const [nameList, setNameList] = useState([]);
   const [originList, setOriginList] = useState([]);
+  const [phoneList, setPhoneList] = useState([]);
   const [showVisible, setShowVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -33,12 +35,13 @@ export default function Home() {
           setNumberList(data.listNumberData);
           setNameList(data.listNameData);
           setOriginList(data.listOriginData);
+          setPhoneList(data.listPhoneData);
         }
       });
   }, []);
 
   useEffect(() => {
-    if (winner) {
+    if (winner[0] !== 0) {
       setShowVisible(true);
     }
   }, [winner]);
@@ -69,6 +72,7 @@ export default function Home() {
 
         setWinnerName(nameList[winningIndex]);
         setWinnerOrigin(originList[winningIndex]);
+        setWinnerPhone(phoneList[winningIndex]);
 
         if (storage) {
           currentWinner = [...currentWinner, ...tempwinner];
@@ -102,8 +106,12 @@ export default function Home() {
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <div className="mt-2">
                           <p className="text-white text-5xl text-center">{winnerName}</p>
+                          <br />
                           <p className="text-white text-6xl text-center">{winner[0]}</p>
+                          <br />
                           <p className="text-white text-4xl text-center">{winnerOrigin}</p>
+                          <br />
+                          <p className="text-white text-4xl text-center">{winnerPhone}</p>
                         </div>
                       </div>
                     </div>
@@ -113,8 +121,8 @@ export default function Home() {
             </div>
           </div>
           )}
-          <div className="bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto">
-            {!isVisible && <SlotCounter
+          {!isVisible && <div className="bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto">
+             <SlotCounter
               startValue={"000"}
               startValueOnce
               value={String(winner[0]).padStart(3, "0")}
@@ -122,8 +130,9 @@ export default function Home() {
               direction="bottom-up"
               autoAnimationStart={false}
               duration={10}
-            />}
-          </div>
+              charClassName="text-[#000]"
+            />
+          </div>}
         </div>
       </div>
     );
