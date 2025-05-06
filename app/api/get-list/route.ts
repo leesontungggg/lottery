@@ -26,7 +26,11 @@ export async function POST() {
 
     return Response.json({
       message: "ok",
-      data: lotteryResult.data.values.map((item: any) => Number(item[0])),
+      listNumberData: lotteryResult.data.values.map((item: any) =>
+        Number(item[0])
+      ),
+      listNameData: lotteryResult.data.values.map((item: any) => item[1]),
+      listOriginData: lotteryResult.data.values.map((item: any) => item[2]),
     });
   } catch (e) {
     console.log(e);
