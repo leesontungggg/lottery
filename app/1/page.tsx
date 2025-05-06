@@ -100,10 +100,10 @@ export default function Home() {
                   <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 aspect-square flex items-center justify-center">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 className="text-base font-semibold text-white" id="modal-title">Thông tin trúng thưởng</h3>
                         <div className="mt-2">
-                          <p className="text-white text-4xl">{winnerName}</p>
-                          <p className="text-white text-2xl">{winnerOrigin}</p>
+                          <p className="text-white text-5xl text-center">{winnerName}</p>
+                          <p className="text-white text-6xl text-center">{winner[0]}</p>
+                          <p className="text-white text-4xl text-center">{winnerOrigin}</p>
                         </div>
                       </div>
                     </div>
@@ -114,7 +114,7 @@ export default function Home() {
           </div>
           )}
           <div className="bg-white aspect-square w-full max-w-[400px] border-8 border-[#C09C61] flex justify-center items-center text-8xl mx-auto">
-            <SlotCounter
+            {!isVisible && <SlotCounter
               startValue={"000"}
               startValueOnce
               value={String(winner[0]).padStart(3, "0")}
@@ -122,7 +122,7 @@ export default function Home() {
               direction="bottom-up"
               autoAnimationStart={false}
               duration={10}
-            />
+            />}
           </div>
         </div>
       </div>
