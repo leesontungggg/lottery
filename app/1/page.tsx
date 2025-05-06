@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import NumberList from "@/public/dot3.json";
 import { useEffect, useState } from "react";
 import SlotCounter from "react-slot-counter";
 
