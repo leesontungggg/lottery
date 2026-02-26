@@ -151,7 +151,7 @@ export default function Home() {
               autoAnimationStart={false}
               duration={8}
               charClassName="text-white"
-              delay={1}
+              delay={2}
             />
           </div>
         </div>
