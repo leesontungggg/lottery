@@ -25,7 +25,7 @@ export async function POST() {
     return Response.json({
       message: "ok",
       listNumberData: lotteryResult.data.values.map((item: any) =>
-        Number(item[0])
+        Number(item[0]),
       ),
       listNameData: lotteryResult.data.values.map((item: any) => item[1]),
       listOriginData: lotteryResult.data.values.map((item: any) => item[2]),
