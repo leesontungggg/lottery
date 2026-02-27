@@ -14,6 +14,9 @@ export default function Home() {
   const [phoneList, setPhoneList] = useState([]);
   const [showVisible, setShowVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [hundredsDigit, setHundredsDigit] = useState("0");
+  const [tensDigit, setTensDigit] = useState("0");
+  const [unitsDigit, setUnitsDigit] = useState("0");
 
   useEffect(() => {
     if (showVisible) {
@@ -53,48 +56,66 @@ export default function Home() {
   }, [winner]);
 
   useEffect(() => {
-    const keyDownHandler = (e: any) => {
-      if (e.code == "Enter") {
-        setShowVisible(false);
-        setIsVisible(false);
-        const storage = window.localStorage.getItem("winner");
+    const handleLotterySelection = () => {
+      setShowVisible(false);
+      setIsVisible(false);
+      const storage = window.localStorage.getItem("winner");
 
-        let currentWinner = storage
-          ? JSON.parse(window.localStorage.getItem("winner") || "")
-          : null;
+      let currentWinner = storage
+        ? JSON.parse(window.localStorage.getItem("winner") || "")
+        : null;
 
-        const tempwinner = numberList
-          .filter((item) =>
-            currentWinner ? !currentWinner.includes(item) : true,
-          )
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 1);
+      const tempwinner = numberList
+        .filter((item) =>
+          currentWinner ? !currentWinner.includes(item) : true,
+        )
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 1);
 
-        setWinner(tempwinner);
+      setWinner(tempwinner);
 
-        const winningIndex = numberList.findIndex(
-          (item) => item === tempwinner[0],
-        );
+      console.log(tempwinner);
 
-        setWinnerName(nameList[winningIndex]);
-        setWinnerOrigin(originList[winningIndex]);
-        setWinnerPhone(phoneList[winningIndex]);
+      const winningIndex = numberList.findIndex(
+        (item) => item === tempwinner[0],
+      );
 
-        if (storage) {
-          currentWinner = [...currentWinner, ...tempwinner];
+      setWinnerName(nameList[winningIndex]);
+      setWinnerOrigin(originList[winningIndex]);
+      setWinnerPhone(phoneList[winningIndex]);
 
-          window.localStorage.setItem("winner", JSON.stringify(currentWinner));
-        } else {
-          window.localStorage.setItem("winner", JSON.stringify(tempwinner));
-        }
+      if (storage) {
+        currentWinner = [...currentWinner, ...tempwinner];
+
+        window.localStorage.setItem("winner", JSON.stringify(currentWinner));
+      } else {
+        window.localStorage.setItem("winner", JSON.stringify(tempwinner));
       }
     };
+
+
+
+    const keyDownHandler = (e: any) => {
+      if (e.code === "Enter") {
+        handleLotterySelection();
+      } else if (e.code === "Digit1" || e.key === "1") {
+        console.log("testing");
+        setHundredsDigit(String(winner[0]).padStart(3, "0").charAt(0));
+      } else if (e.code === "Digit2" || e.key === "2") {
+        console.log("testing 2");
+        setTensDigit(String(winner[0]).padStart(3, "0").charAt(1));
+      } else if (e.code === "Digit3" || e.key === "3") {
+        console.log("testing 3");
+        setUnitsDigit(String(winner[0]).padStart(3, "0").charAt(2));
+      }
+    };
+
     document.addEventListener("keydown", keyDownHandler);
 
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [nameList, numberList, originList, phoneList]);
+  }, [nameList, numberList, originList, phoneList, winner]);
 
   if (numberList.length)
     return (
@@ -142,10 +163,37 @@ export default function Home() {
           <div
             className={`${!isVisible ? "opacity-100" : "opacity-0"} bg-transparent aspect-square w-full max-w-[400px] flex justify-center items-center text-8xl mx-auto`}
           >
+            {/* Hundreds digit */}
             <SlotCounter
-              startValue={"000"}
+              startValue={"0"}
               startValueOnce
-              value={String(winner[0]).padStart(3, "0")}
+              value={hundredsDigit}
+              animateUnchanged
+              direction="top-down"
+              autoAnimationStart={false}
+              duration={8}
+              charClassName="text-white"
+              delay={2}
+            />
+
+            {/* Tens digit */}
+            <SlotCounter
+              startValue={"0"}
+              startValueOnce
+              value={tensDigit}
+              animateUnchanged
+              direction="top-down"
+              autoAnimationStart={false}
+              duration={8}
+              charClassName="text-white"
+              delay={2}
+            />
+
+            {/* Units digit */}
+            <SlotCounter
+              startValue={"0"}
+              startValueOnce
+              value={unitsDigit}
               animateUnchanged
               direction="top-down"
               autoAnimationStart={false}
