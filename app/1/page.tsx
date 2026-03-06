@@ -93,11 +93,12 @@ export default function Home() {
       }
     };
 
-
-
     const keyDownHandler = (e: any) => {
       if (e.code === "Enter") {
         handleLotterySelection();
+        setHundredsDigit("?");
+        setTensDigit("?");
+        setUnitsDigit("?");
       } else if (e.code === "Digit1" || e.key === "1") {
         console.log("testing");
         setHundredsDigit(String(winner[0]).padStart(3, "0").charAt(0));
@@ -165,41 +166,74 @@ export default function Home() {
           >
             {/* Hundreds digit */}
             <SlotCounter
-              startValue={"0"}
-              startValueOnce
+              startValue={"?"}
               value={hundredsDigit}
-              animateUnchanged
+              animateUnchanged={true}
               direction="top-down"
               autoAnimationStart={false}
-              duration={8}
+              duration={hundredsDigit !== "?" ? 8 : 0}
               charClassName="text-white"
               delay={2}
+              dummyCharacters={[
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+              ]}
             />
 
             {/* Tens digit */}
             <SlotCounter
-              startValue={"0"}
-              startValueOnce
+              startValue={"?"}
               value={tensDigit}
-              animateUnchanged
+              animateUnchanged={true}
               direction="top-down"
               autoAnimationStart={false}
-              duration={8}
+              duration={tensDigit !== "?" ? 8 : 0}
               charClassName="text-white"
               delay={2}
+              dummyCharacters={[
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+              ]}
             />
 
             {/* Units digit */}
             <SlotCounter
-              startValue={"0"}
-              startValueOnce
+              startValue={"?"}
               value={unitsDigit}
-              animateUnchanged
+              animateUnchanged={true}
               direction="top-down"
               autoAnimationStart={false}
-              duration={8}
+              duration={unitsDigit !== "?" ? 8 : 0}
               charClassName="text-white"
               delay={2}
+              dummyCharacters={[
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+              ]}
             />
           </div>
         </div>
