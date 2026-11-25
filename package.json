@@ -13,7 +13,8 @@
     "next": "15.5.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-slot-counter": "^3.0.5"
+    "react-slot-counter": "^3.0.5",
+    "buffer-equal-constant-time": "file:./shims/buffer-equal-constant-time"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -27,6 +28,6 @@
     "typescript": "^5"
   },
   "overrides": {
-    "buffer-equal-constant-time": "file:./shims/buffer-equal-constant-time"
+    "buffer-equal-constant-time": "$buffer-equal-constant-time"
   }
 }
