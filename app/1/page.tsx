@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import SlotCounter from "react-slot-counter";
 
+const DIGIT_COUNT = 4;
+const DUMMY_CHARACTERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 export default function Home() {
   const [winner, setWinner] = useState<any>([0]);
   const [winnerName, setWinnerName] = useState<any>("");
@@ -14,9 +17,9 @@ export default function Home() {
   const [phoneList, setPhoneList] = useState([]);
   const [showVisible, setShowVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [hundredsDigit, setHundredsDigit] = useState("0");
-  const [tensDigit, setTensDigit] = useState("0");
-  const [unitsDigit, setUnitsDigit] = useState("0");
+  const [digits, setDigits] = useState<string[]>(
+    Array(DIGIT_COUNT).fill("0"),
+  );
 
   useEffect(() => {
     if (showVisible) {
@@ -96,18 +99,20 @@ export default function Home() {
     const keyDownHandler = (e: any) => {
       if (e.code === "Enter") {
         handleLotterySelection();
-        setHundredsDigit("?");
-        setTensDigit("?");
-        setUnitsDigit("?");
-      } else if (e.code === "Digit1" || e.key === "1") {
-        console.log("testing");
-        setHundredsDigit(String(winner[0]).padStart(3, "0").charAt(0));
-      } else if (e.code === "Digit2" || e.key === "2") {
-        console.log("testing 2");
-        setTensDigit(String(winner[0]).padStart(3, "0").charAt(1));
-      } else if (e.code === "Digit3" || e.key === "3") {
-        console.log("testing 3");
-        setUnitsDigit(String(winner[0]).padStart(3, "0").charAt(2));
+        setDigits(Array(DIGIT_COUNT).fill("?"));
+        return;
+      }
+
+      // Keys 1..DIGIT_COUNT reveal the digit at that position (left to right)
+      const match = /^(?:Digit|Numpad)(\d)$/.exec(e.code) ?? /^(\d)$/.exec(e.key);
+      const position = match ? Number(match[1]) - 1 : -1;
+      if (position >= 0 && position < DIGIT_COUNT) {
+        const winnerCode = String(winner[0]).padStart(DIGIT_COUNT, "0");
+        setDigits((prev) => {
+          const next = [...prev];
+          next[position] = winnerCode.charAt(position);
+          return next;
+        });
       }
     };
 
@@ -164,77 +169,20 @@ export default function Home() {
           <div
             className={`${!isVisible ? "opacity-100" : "opacity-0"} bg-transparent aspect-square w-full max-w-[400px] flex justify-center items-center text-8xl mx-auto`}
           >
-            {/* Hundreds digit */}
-            <SlotCounter
-              startValue={"?"}
-              value={hundredsDigit}
-              animateUnchanged={true}
-              direction="top-down"
-              autoAnimationStart={false}
-              duration={hundredsDigit !== "?" ? 8 : 0}
-              charClassName="text-white"
-              delay={2}
-              dummyCharacters={[
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-              ]}
-            />
-
-            {/* Tens digit */}
-            <SlotCounter
-              startValue={"?"}
-              value={tensDigit}
-              animateUnchanged={true}
-              direction="top-down"
-              autoAnimationStart={false}
-              duration={tensDigit !== "?" ? 8 : 0}
-              charClassName="text-white"
-              delay={2}
-              dummyCharacters={[
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-              ]}
-            />
-
-            {/* Units digit */}
-            <SlotCounter
-              startValue={"?"}
-              value={unitsDigit}
-              animateUnchanged={true}
-              direction="top-down"
-              autoAnimationStart={false}
-              duration={unitsDigit !== "?" ? 8 : 0}
-              charClassName="text-white"
-              delay={2}
-              dummyCharacters={[
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-              ]}
-            />
+            {digits.map((digit, index) => (
+              <SlotCounter
+                key={index}
+                startValue={"?"}
+                value={digit}
+                animateUnchanged={true}
+                direction="top-down"
+                autoAnimationStart={false}
+                duration={digit !== "?" ? 8 : 0}
+                charClassName="text-white"
+                delay={2}
+                dummyCharacters={DUMMY_CHARACTERS}
+              />
+            ))}
           </div>
         </div>
       </div>

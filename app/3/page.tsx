@@ -44,9 +44,9 @@ export default function Home() {
     <div className="grid grid-cols-3 gap-2 w-full px-2">
       <div className="bg-white aspect-square w-full border-8 border-[#C09C61] flex justify-center items-center text-6xl">
         <SlotCounter
-          startValue={"000"}
+          startValue={"0000"}
           startValueOnce
-          value={String(winner[0]).padStart(3, "0")}
+          value={String(winner[0]).padStart(4, "0")}
           animateUnchanged
           direction="bottom-up"
           autoAnimationStart={false}
@@ -55,9 +55,9 @@ export default function Home() {
       </div>
       <div className="bg-white aspect-square w-full border-8 border-[#C09C61] flex justify-center items-center text-6xl">
         <SlotCounter
-          startValue={"000"}
+          startValue={"0000"}
           startValueOnce
-          value={String(winner[1]).padStart(3, "0")}
+          value={String(winner[1]).padStart(4, "0")}
           animateUnchanged
           direction="bottom-up"
           autoAnimationStart={false}
@@ -66,9 +66,9 @@ export default function Home() {
       </div>
       <div className="bg-white aspect-square w-full border-8 border-[#C09C61] flex justify-center items-center text-6xl">
         <SlotCounter
-          startValue={"000"}
+          startValue={"0000"}
           startValueOnce
-          value={String(winner[2]).padStart(3, "0")}
+          value={String(winner[2]).padStart(4, "0")}
           animateUnchanged
           direction="bottom-up"
           autoAnimationStart={false}
