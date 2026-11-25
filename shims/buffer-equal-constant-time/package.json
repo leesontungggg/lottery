@@ -1,0 +1,7 @@
+{
+  "name": "buffer-equal-constant-time",
+  "version": "1.0.1-shim",
+  "description": "Node 24+ compatible replacement (original reads removed buffer.SlowBuffer)",
+  "main": "index.js",
+  "license": "BSD-3-Clause"
+}
